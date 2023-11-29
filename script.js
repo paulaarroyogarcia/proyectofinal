@@ -67,7 +67,6 @@ function handleIncorrectGuess(userGuess) {
 function showHint() {
     const userGuess = parseInt(guessInput.value);
     const hint = targetNumber > userGuess ? 'menor' : 'mayor';
-    instructionsElement.textContent = `Pista: El número objetivo es ${hint} que ${userGuess}.`;
 }
 
 function resetGame() {
