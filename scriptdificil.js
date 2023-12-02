@@ -13,7 +13,7 @@ function generateRandomNumber() {
 }
 
 function startCountdown() {
-    let seconds = 60;
+    let seconds = 40;
 
     countdown = setInterval(() => {
         instructionsElement.textContent = `¡Buena suerte! - Tiempo restante: ${seconds} segundos`;
@@ -34,7 +34,6 @@ function stopCountdown() {
 
 function checkGuess() {
     if (attempts === 0) {
-        // Si es el primer intento de la ronda, comienza la cuenta regresiva
         startCountdown();
     }
 
@@ -98,7 +97,7 @@ function resetGame() {
     attempts = 0;
     score = 0;
     resultElement.textContent += ' ¡Vamos por otra ronda!';
-    stopCountdown(); // Detén la cuenta regresiva actual
+    stopCountdown();
 
     clearInterval(intervalId);
     intervalId = setInterval(() => {
@@ -106,7 +105,8 @@ function resetGame() {
     }, 5000);
 }
 
-// Configurar el primer intervalo
+
 intervalId = setInterval(() => {
     showHint();
 }, 5000);
+
