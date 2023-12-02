@@ -2,6 +2,7 @@ let targetNumber;
 let attempts = 0;
 let score = 0;
 let intervalId;
+let countdown;
 
 const guessInput = document.getElementById('guessInput');
 const resultElement = document.getElementById('result');
@@ -11,7 +12,32 @@ function generateRandomNumber() {
     return Math.floor(Math.random() * 10) + 1;
 }
 
+function startCountdown() {
+    let seconds = 30; // Puedes ajustar la duración de la cuenta regresiva según tus preferencias
+
+    countdown = setInterval(() => {
+        instructionsElement.textContent = `¡Buena suerte! - Tiempo restante: ${seconds} segundos`;
+
+        if (seconds === 0) {
+            resultElement.textContent = `¡Se agotó el tiempo! El número era ${targetNumber}.`;
+            resetGame();
+        }
+
+        seconds--;
+    }, 1000);
+}
+
+function stopCountdown() {
+    clearInterval(countdown);
+    instructionsElement.textContent = '¡Buena suerte!';
+}
+
 function checkGuess() {
+    if (attempts === 0) {
+        // Si es el primer intento de la ronda, comienza la cuenta regresiva
+        startCountdown();
+    }
+
     const userGuess = parseInt(guessInput.value);
 
     if (isNaN(userGuess) || userGuess < 1 || userGuess > 10) {
@@ -23,7 +49,6 @@ function checkGuess() {
             handleCorrectGuess();
         } else {
             handleIncorrectGuess(userGuess);
-
         }
     }
 }
@@ -48,7 +73,6 @@ function handleCorrectGuess() {
     resetGame();
 }
 
-
 function handleIncorrectGuess(userGuess) {
     const hint = userGuess < targetNumber ? 'mayor' : 'menor';
     resultElement.textContent = `Incorrecto. Sigue intentando. Intento #${attempts}. El número es ${hint} que ${userGuess}.`;
@@ -56,7 +80,7 @@ function handleIncorrectGuess(userGuess) {
     if (attempts >= 3) {
         showHint();
     }
-    if (attempts >= 5) {
+    if (attempts >= 4) {
         resultElement.textContent = `¡Oh no! Has agotado tus intentos. El número era ${targetNumber}.`;
         resetGame();
     } else {
@@ -74,14 +98,13 @@ function resetGame() {
     attempts = 0;
     score = 0;
     resultElement.textContent += ' ¡Vamos por otra ronda!';
-    instructionsElement.textContent = '¡Buena suerte!';
+    stopCountdown(); // Detén la cuenta regresiva actual
 
     clearInterval(intervalId);
     intervalId = setInterval(() => {
         showHint();
     }, 5000);
 }
-
 
 // Configurar el primer intervalo
 intervalId = setInterval(() => {
