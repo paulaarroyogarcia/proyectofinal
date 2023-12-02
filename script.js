@@ -73,8 +73,8 @@ function handleCorrectGuess() {
 }
 
 function handleIncorrectGuess(userGuess) {
-    const hint = userGuess < targetNumber ? 'mayor' : 'menor';
-    resultElement.textContent = `Incorrecto. Sigue intentando. Intento #${attempts}. El número es ${hint} que ${userGuess}.`;
+    const hint = userGuess < targetNumber ? 'MAYOR' : 'MENOR';
+    resultElement.textContent = `Incorrecto. Sigue intentando. Intento ${attempts}. El número es ${hint} que ${userGuess}.`;
 
     if (attempts >= 3) {
         showHint();
