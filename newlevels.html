@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Adivina el número</h1>
+            <p>Intenta adivinar el número entre 1 y 100:</p>
+            <p>Antes de empezar pulsa Reiniciar</p>
+            <p>Inserta en el recuadro blanco un numero del 1 al 100 y pulsa Comprobar.</p>
+            <p>En caso de fallo, iran apareciendo pistas.</p>
+            <p>Tienes 6 intentos y 60 segundos</p>
+            <p>Y en caso de querer volver a empezar, pulsa Reiniciar</p>
+            <input type="number" id="guessInput">
+            <button onclick="checkGuess()">Comprobar</button>
+            <button onclick="resetGame()">Reiniciar</button>
+            <p id="result"></p>
+            <p id="instructions">¡Adelante!</p>
+            <p>Si te parecio dificil, puedes volver al modo facil:</p>
+            <a href="index.html">
+                <button id="modoBtn">Modo Facil</button>
+              </a>
+        </div>
+        <script src="scriptdificil.js"></script>
+    </body>
+</html>
